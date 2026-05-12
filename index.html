@@ -204,6 +204,117 @@
   footer { background: #000000; border-top: 1px solid rgba(255,255,255,0.08); }
   footer p { color: rgba(240,240,234,0.35); }
   nav { background: rgba(0,0,0,0.96) !important; border-bottom: 1px solid rgba(255,255,255,0.07); }
+
+ .modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.78); backdrop-filter: blur(6px);
+  z-index: 999; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: #00151b; border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px; width: 100%; max-width: 520px;
+  padding: 48px 44px 44px; position: relative;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(184,255,78,0.06);
+  animation: modalIn 0.28s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal::before {
+  content: ''; position: absolute; top: 0; left: 44px; right: 44px;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--wh-lime), transparent);
+  border-radius: 100%; opacity: 0.5;
+}
+.modal-close {
+  position: absolute; top: 18px; right: 18px;
+  background: none; border: none; color: var(--wh-muted);
+  cursor: pointer; width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; transition: color 0.18s, background 0.18s;
+}
+.modal-close:hover { color: var(--wh-text); background: rgba(255,255,255,0.06); }
+.modal-eyebrow {
+  font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--wh-lime); font-family: var(--font-display); font-weight: 600; margin-bottom: 10px;
+}
+.modal-title {
+  font-family: var(--font-display); font-weight: 800; font-size: 24px;
+  line-height: 1.25; color: var(--wh-text); margin-bottom: 6px;
+}
+.modal-sub { font-size: 13.5px; color: var(--wh-muted); margin-bottom: 32px; line-height: 1.55; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.form-group.no-mb { margin-bottom: 0; }
+.modal label {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.4px;
+  color: rgba(240,240,234,0.55); text-transform: uppercase; font-family: var(--font-display);
+}
+.modal input[type="text"],
+.modal input[type="email"],
+.modal select {
+  background: #ffffff; color: #111111;
+  border: 1px solid rgba(255,255,255,0.18); border-radius: 7px;
+  padding: 11px 14px; font-family: var(--font-body); font-size: 14px;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%; appearance: none;
+}
+.modal input::placeholder { color: #9ca3af; }
+.modal input[type="text"]:focus,
+.modal input[type="email"]:focus,
+.modal select:focus {
+  border-color: var(--wh-lime); box-shadow: 0 0 0 3px rgba(184,255,78,0.12);
+}
+.select-wrap { position: relative; }
+.select-wrap select { padding-right: 36px; cursor: pointer; }
+.select-wrap select.placeholder-active { color: #9ca3af; }
+.select-wrap::after {
+  content: ''; position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%); width: 0; height: 0;
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 5px solid #6b7280; pointer-events: none;
+}
+.gdpr-wrap {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin-top: 20px; margin-bottom: 24px; padding: 16px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px;
+}
+.gdpr-wrap input[type="checkbox"] {
+  appearance: none; min-width: 18px; min-height: 18px; width: 18px; height: 18px;
+  border: 1.5px solid rgba(255,255,255,0.25); border-radius: 4px;
+  background: rgba(255,255,255,0.05); cursor: pointer; margin-top: 2px;
+  transition: border-color 0.18s, background 0.18s; flex-shrink: 0;
+}
+.gdpr-wrap input[type="checkbox"]:checked {
+  background: var(--wh-lime); border-color: var(--wh-lime);
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%230a0a0a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center;
+}
+.gdpr-text { font-size: 12px; color: rgba(240,240,234,0.45); line-height: 1.6; }
+.btn-submit {
+  width: 100%; background: var(--wh-lime); color: #0a0a0a;
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  border: none; border-radius: 7px; padding: 14px 22px; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.modal-success { display: none; flex-direction: column; align-items: center; text-align: center; padding: 20px 0; }
+.modal-success.show { display: flex; }
+.modal-form.hide { display: none; }
+.success-icon {
+  width: 56px; height: 56px; background: var(--wh-lime-dim);
+  border: 1px solid rgba(184,255,78,0.3); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.success-title { font-family: var(--font-display); font-weight: 800; font-size: 22px; margin-bottom: 8px; }
+.success-sub { font-size: 14px; color: var(--wh-muted); line-height: 1.6; max-width: 320px; }
+@media (max-width: 540px) {
+  .modal { padding: 36px 24px 32px; }
+  .form-row { grid-template-columns: 1fr; }
+  .modal-title { font-size: 21px; }
+}
+
 </style>
 </head>
 <body>
@@ -219,7 +330,8 @@
     <li><a href="/Whale-hound.science/#contact">Contact</a></li>
   </ul>
 
-  <a href="/Whale-hound.science/#contact" class="btn-primary">Book a call</a>
+  <button class="btn-primary" onclick="openModal()">Book a call</button>
+
 </nav>
 
 <div class="hero-wrapper">
@@ -661,6 +773,115 @@ if(ticker){
   buildSet().forEach(p=>ticker.appendChild(p));
   buildSet().forEach(p=>ticker.appendChild(p));
 }
+
+ function openModal() {
+  document.getElementById('demoModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('demoModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('demoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+document.getElementById('gdprConsent').addEventListener('change', function() {
+  document.getElementById('submitBtn').disabled = !this.checked;
+});
+function handleSelectChange(el) {
+  el.classList.remove('placeholder-active');
+}
+function handleSubmit() {
+  const fields = ['firstName','lastName','workEmail','companyName'];
+  let valid = true;
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { el.style.borderColor = 'rgba(220,60,60,0.6)'; valid = false; }
+    else el.style.borderColor = '';
+  });
+  const service = document.getElementById('service').value;
+  if (!service) { document.getElementById('service').style.borderColor = 'rgba(220,60,60,0.6)'; valid = false; }
+  else document.getElementById('service').style.borderColor = '';
+  if (!valid) return;
+  document.getElementById('modalForm').classList.add('hide');
+  document.getElementById('modalSuccess').classList.add('show');
+}
+ 
 </script>
+ <!-- DEMO REQUEST MODAL -->
+<div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="modal-form" id="modalForm">
+      <p class="modal-eyebrow">Whale Hound by ChainLabs</p>
+      <h2 class="modal-title" id="modalTitle">Let's talk about your players.</h2>
+      <p class="modal-sub">Tell us a little about your operation and we'll set up a call around your schedule.</p>
+
+      <div class="form-row">
+        <div class="form-group no-mb">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name">
+        </div>
+        <div class="form-group no-mb">
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="workEmail">Work email</label>
+        <input type="email" id="workEmail" name="workEmail" placeholder="jane@yourcompany.com" autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="companyName">Company name</label>
+        <input type="text" id="companyName" name="companyName" placeholder="Your company" autocomplete="organization">
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service of interest</label>
+        <div class="select-wrap">
+          <select id="service" name="service" class="placeholder-active" onchange="handleSelectChange(this)">
+            <option value="" disabled selected>Select a service</option>
+            <option value="vip-detection">Whale Detection</option>
+            <option value="blockchain-investigation">Blockchain Investigation</option>
+            <option value="fraud-abuse-detection">Fraud &amp; Abuse Detection</option>
+            <option value="aml-risk-scoring">AML Risk Scoring</option>
+            <option value="all">All of the above</option>
+            <option value="other">Other / Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="gdpr-wrap">
+        <input type="checkbox" id="gdprConsent" name="gdprConsent">
+        <p class="gdpr-text">By submitting this form, you agree that Whale Hound may process your personal data to contact you regarding your request and related services. Your information will be handled in accordance with applicable data protection laws and will not be shared with third parties without your consent.</p>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="handleSubmit()" disabled>Submit my request</button>
+    </div>
+
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12L9.5 16.5L19 7" stroke="#b8ff4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="modal-eyebrow" style="margin-bottom:8px;">Request received</p>
+      <h3 class="success-title">We'll be in touch soon.</h3>
+      <p class="success-sub">Someone from the Whale Hound team will reach out to arrange a call within one business day.</p>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>

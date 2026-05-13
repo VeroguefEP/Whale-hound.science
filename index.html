@@ -314,7 +314,25 @@
   .form-row { grid-template-columns: 1fr; }
   .modal-title { font-size: 21px; }
 }
-
+/* DROPDOWN NAV */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a { display: flex; align-items: center; gap: 5px; }
+.nav-dropdown > a::after { content: ''; display: inline-block; width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.2s; }
+.nav-dropdown:hover > a::after { transform: rotate(-135deg) translateY(-2px); }
+.dropdown-panel { display: none; position: absolute; top: calc(100% + 16px); left: 50%; transform: translateX(-50%); background: #111111; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 8px; min-width: 480px; box-shadow: 0 24px 48px rgba(0,0,0,0.5); z-index: 200; }
+.nav-dropdown:hover .dropdown-panel { display: block; }
+.dropdown-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 6px 8px; }
+.dropdown-section-label { font-size: 10px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(240,240,234,0.3); padding: 8px 12px 4px; font-family: var(--font-body); }
+.dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 12px; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+.dropdown-item:hover { background: rgba(255,255,255,0.05); }
+.dropdown-item-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.dropdown-item-text strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--wh-text); margin-bottom: 2px; }
+.dropdown-item-text span { font-size: 12px; color: var(--wh-muted); line-height: 1.5; font-family: var(--font-body); font-weight: 400; }
+.dropdown-audience { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px 4px; }
+.dropdown-audience-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; text-decoration: none; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); transition: background 0.15s, border-color 0.15s; }
+.dropdown-audience-item:hover { background: rgba(184,255,78,0.06); border-color: rgba(184,255,78,0.2); }
+.dropdown-audience-item span { font-size: 13px; color: var(--wh-text); font-family: var(--font-body); font-weight: 500; }
+ 
 </style>
 </head>
 <body>
@@ -325,12 +343,77 @@
   </a>
 
   <ul class="nav-links">
-    <li><a href="/Whale-hound.science/#services">Services</a></li>
-    <li><a href="/Whale-hound.science/blockchain-investigation/">Blockchain Investigation</a></li>
+
+    <!-- Blockchain Intelligence Solutions dropdown -->
+    <li class="nav-dropdown">
+      <a href="#">Blockchain Intelligence Solutions</a>
+      <div class="dropdown-panel">
+
+        <!-- Services -->
+        <div class="dropdown-section-label">Solutions</div>
+
+        <a href="/Whale-hound.science/#whale-detection" class="dropdown-item">
+          <div class="dropdown-item-icon" style="background:rgba(184,255,78,0.1);border:1px solid rgba(184,255,78,0.2);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <strong>Whale Detection</strong>
+            <span>Reveals the true crypto wealth of your players — so you know who to treat as a high-value target from their very first deposit.</span>
+          </div>
+        </a>
+
+        <a href="/Whale-hound.science/blockchain-investigation/" class="dropdown-item">
+          <div class="dropdown-item-icon" style="background:rgba(78,234,255,0.1);border:1px solid rgba(78,234,255,0.2);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4eeaff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10l4 4m6 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <strong>Blockchain Analytics</strong>
+            <span>Deep on-chain intelligence for tracing funds, profiling player activity, and understanding where the money in your platform actually comes from.</span>
+          </div>
+        </a>
+
+        <a href="/Whale-hound.science/#fraud-detection" class="dropdown-item">
+          <div class="dropdown-item-icon" style="background:rgba(212,83,126,0.1);border:1px solid rgba(212,83,126,0.2);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4537e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <strong>Fraud &amp; Abuse Detection</strong>
+            <span>Catches bonus abuse rings, affiliate fraud, and collusion networks on-chain — before bad actors withdraw and disappear.</span>
+          </div>
+        </a>
+
+        <a href="/Whale-hound.science/#aml" class="dropdown-item">
+          <div class="dropdown-item-icon" style="background:rgba(250,199,117,0.1);border:1px solid rgba(250,199,117,0.2);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fac775" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="dropdown-item-text">
+            <strong>AML Risk Scoring</strong>
+            <span>Screens every crypto transaction against 500M+ labeled wallets — meeting compliance requirements without adding friction for legitimate players.</span>
+          </div>
+        </a>
+
+        <div class="dropdown-divider"></div>
+
+        <!-- Audience links -->
+        <div class="dropdown-section-label">Who it's for</div>
+        <div class="dropdown-audience">
+          <a href="/Whale-hound.science/#igaming" class="dropdown-audience-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b8ff4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            <span>For iGaming Operators</span>
+          </a>
+          <a href="/Whale-hound.science/#bi-companies" class="dropdown-audience-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4eeaff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-3 3"/></svg>
+            <span>For BI Companies</span>
+          </a>
+        </div>
+
+      </div>
+    </li>
+
     <li><a href="/Whale-hound.science/#contact">Contact</a></li>
   </ul>
 
-  <button class="btn-primary" onclick="openModal()">Book a call</button>
+  <button class="btn-primary" onclick="openModal()">Request a call</button>
 
 </nav>
 
